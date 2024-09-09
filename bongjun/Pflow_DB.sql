@@ -13,8 +13,10 @@ CREATE TABLE `boards` (
 	`board_date` date NOT NULL,
 	`board_view` int NOT NULL COMMENT '방문한 숫자(0부터 시작)',
 	`user_id` int NOT NULL,
+    `category_id` int NOT NULL,
 	PRIMARY KEY (board_id ),
-	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE
 
 );
 
@@ -103,10 +105,8 @@ CREATE TABLE `training` (
 
 CREATE TABLE `category` (
 	`category_id` int NOT NULL COMMENT '4개' AUTO_INCREMENT,
-    `board_id` int NOT NULL,
 	`category` varchar(8) NOT NULL COMMENT '면접후기, 퇴사후기, 일상, 진로상담',
-	PRIMARY KEY (category_id, board_id),
-    FOREIGN KEY (board_id) REFERENCES boards(board_id) ON DELETE CASCADE
+	PRIMARY KEY (category_id)
 );
 
 CREATE TABLE `skill` (
