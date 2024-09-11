@@ -6,6 +6,12 @@ CREATE TABLE `users` (
 	PRIMARY KEY (user_id)
 );
 
+CREATE TABLE `category` (
+	`category_id` int NOT NULL COMMENT '4개' AUTO_INCREMENT,
+	`category` varchar(8) NOT NULL COMMENT '면접후기, 퇴사후기, 일상, 진로상담',
+	PRIMARY KEY (category_id)
+);
+
 CREATE TABLE `boards` (
 	`board_id` int NOT NULL COMMENT '게시글의 고유한 번호' AUTO_INCREMENT,
 	`board_title` varchar(20) NOT NULL,
@@ -30,7 +36,7 @@ CREATE TABLE `education` (
 	`education_id` int NOT NULL COMMENT '작성한 학력의 고유 번호' AUTO_INCREMENT,
 	`school_name` varchar(10) NOT NULL,
 	`major` varchar(20) NULL COMMENT '대학교라면 전공, 고졸이면 null가능',
-	`graduation_date` date NOT NULL,
+	`education_date` date NOT NULL,
 	`graduation_id` int NOT NULL COMMENT '4개',
     PRIMARY KEY (education_id),
     FOREIGN KEY (graduation_id) REFERENCES graduation(graduation_id) ON DELETE CASCADE
@@ -47,9 +53,9 @@ CREATE TABLE `cover_letter` (
 CREATE TABLE `resume` (
 	`resume_id` int NOT NULL COMMENT '작성한 이력서' AUTO_INCREMENT,
 	`photo` varchar(255) NULL COMMENT '이력서에 올릴 사진',
-    `resume_email` varchar(20) NULL 
-	`education_id` int NULL COMMENT '작성한 학력의 고유 번호',
-	`letter_id`  int NULL COMMENT '작성한 자소서 고유 번호',
+    `resume_email` varchar(20) NULL, 
+	`education_id` int NOT NULL COMMENT '작성한 학력의 고유 번호',
+	`letter_id`  int NOT NULL COMMENT '작성한 자소서 고유 번호',
 	`user_id` int NOT NULL,
 	PRIMARY KEY (resume_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
@@ -103,12 +109,6 @@ CREATE TABLE `training` (
     FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
 );
 
-CREATE TABLE `category` (
-	`category_id` int NOT NULL COMMENT '4개' AUTO_INCREMENT,
-	`category` varchar(8) NOT NULL COMMENT '면접후기, 퇴사후기, 일상, 진로상담',
-	PRIMARY KEY (category_id)
-);
-
 CREATE TABLE `skill` (
 	`skill_id` int NOT NULL,
     `resume_id` int NOT NULL,
@@ -123,7 +123,9 @@ CREATE TABLE `user_info` (
 	`info_gender` enum('남' , '여') NOT NULL,
 	`info_birth` date NOT NULL,
 	`info_phone_number` varchar(12) NOT NULL,
-	`info_address` varchar(40) NOT NULL,
+	`info_address` varchar(20) NOT NULL,
+    `info_detail` varchar(20) NOT NULL,
+    `info_portfolio` varchar(30) NULL,
 	`user_id` int NOT NULL,
 	PRIMARY KEY (info_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
