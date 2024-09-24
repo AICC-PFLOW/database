@@ -53,7 +53,6 @@ CREATE TABLE `cover_letter` (
 CREATE TABLE `resume` (
 	`resume_id` int NOT NULL COMMENT '작성한 이력서' AUTO_INCREMENT,
 	`photo` varchar(255) NULL COMMENT '이력서에 올릴 사진',
-    `resume_email` varchar(20) NULL, 
 	`education_id` int NOT NULL COMMENT '작성한 학력의 고유 번호',
 	`letter_id`  int NOT NULL COMMENT '작성한 자소서 고유 번호',
 	`user_id` int NOT NULL,
@@ -80,25 +79,14 @@ CREATE TABLE `career` (
 	`career_name` varchar(20) NOT NULL COMMENT '경력이 있는 사람만 테이블 생성',
 	`career_start` date NOT NULL,
 	`career_end` date NOT NULL,
-	`career_work` varchar(20) NOT NULL COMMENT '다니던 회사에서의 주요 업무',
+	`career_work` varchar(20) NOT NULL COMMENT '다니던 회사에서의 담당 업무',
 	`career_position` varchar(10) NOT NULL COMMENT 'ex) 사원, 대리, 과장, 부장, 연구원 등 ...',
 	PRIMARY KEY (career_id, resume_id),
     FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
 );
 
-CREATE TABLE `certification` (
-	`certification_id` int NOT NULL COMMENT '작성한 자격증의 고유 번호',
-    `resume_id` int NOT NULL,
-	`certification_date` date NOT NULL,
-	`certification_name` varchar(20) NOT NULL COMMENT 'ex) 정보처리기사, 빅데이터분석기사',
-	`certification_number` varchar(20) NULL COMMENT '자격증 번호',
-	`certification_center` varchar(15) NOT NULL COMMENT 'ex) 한국산업인력공단, 한국전력공사, 한국정보화진흥원',
-	PRIMARY KEY (certification_id, resume_id),
-    FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
-);
-
 CREATE TABLE `training` (
-	`training_id` int NOT NULL COMMENT '작성한 교육이수의 고유 번호',
+	`training_id` int NOT NULL COMMENT '작성한 교육이수의 고유 번호' AUTO_INCREMENT,
     `resume_id` int NOT NULL,
     `training_name` varchar(20) NOT NULL,
 	`training_center` varchar(10) NOT NULL COMMENT '교육을 들었던 기관 .... ex) 코드랩 아카데미',
@@ -132,6 +120,16 @@ CREATE TABLE `user_info` (
 );
 
 
+-- CREATE TABLE `certification` (
+-- 	`certification_id` int NOT NULL COMMENT '작성한 자격증의 고유 번호',
+--     `resume_id` int NOT NULL,
+-- 	`certification_date` date NOT NULL,
+-- 	`certification_name` varchar(20) NOT NULL COMMENT 'ex) 정보처리기사, 빅데이터분석기사',
+-- 	`certification_number` varchar(20) NULL COMMENT '자격증 번호',
+-- 	`certification_center` varchar(15) NOT NULL COMMENT 'ex) 한국산업인력공단, 한국전력공사, 한국정보화진흥원',
+-- 	PRIMARY KEY (certification_id, resume_id),
+--     FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
+-- );
 
 
 -- 회사 추천 DB 설계는 나중에 생각
