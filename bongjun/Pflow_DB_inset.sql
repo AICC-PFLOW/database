@@ -12,7 +12,7 @@ INSERT INTO `category` (`category`)
 VALUES 
 ('면접후기'), 
 ('퇴사후기'), 
-('일상'), 
+('취준일상'), 
 ('진로상담');
 
 INSERT INTO `boards` (`board_title`, `board_content`, `board_date`, `board_view`, `user_id`, `category_id`) 
@@ -37,10 +37,10 @@ VALUES
 ('첫 자소서', '성실하게 임하겠습니다.'),
 ('경력직 자소서', '이전 회사에서의 경험을 살리겠습니다.');
 
-INSERT INTO `resume` (`photo`, `education_id`, `letter_id`, `user_id`) 
+INSERT INTO `resume` (`photo`,`resume_date`, `education_id`, `letter_id`, `user_id`) 
 VALUES 
-('photo1.jpg', 1, 1, 1),
-('photo2.jpg', 2, 2, 2);
+('photo1.jpg', '2024-08-08' ,1 , 1, 1),
+('photo2.jpg', '2024-09-07' ,2, 2, 2);
 
 INSERT INTO `career` (`career_id`, `resume_id`, `career_name`, `career_start`, `career_end`, `career_work`, `career_position`) 
 VALUES 

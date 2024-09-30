@@ -46,13 +46,14 @@ CREATE TABLE `education` (
 CREATE TABLE `cover_letter` (
 	`letter_id` int NOT NULL COMMENT '작성한 자소서 고유 번호' AUTO_INCREMENT,
 	`letter_title` varchar(20) NOT NULL COMMENT '자소서 제목',
-	`letter_content` varchar(500) NOT NULL COMMENT '작성한 자소서 내용',
+	`letter_content` varchar(1000) NOT NULL COMMENT '작성한 자소서 내용',
     PRIMARY KEY (letter_id)
 );
 
 CREATE TABLE `resume` (
 	`resume_id` int NOT NULL COMMENT '작성한 이력서' AUTO_INCREMENT,
-	`photo` varchar(255) NULL COMMENT '이력서에 올릴 사진',
+	`photo` varchar(500) NULL COMMENT '이력서에 올릴 사진',
+	`resume_date` date NOT NULL,
 	`education_id` int NOT NULL COMMENT '작성한 학력의 고유 번호',
 	`letter_id`  int NOT NULL COMMENT '작성한 자소서 고유 번호',
 	`user_id` int NOT NULL,
@@ -92,7 +93,6 @@ CREATE TABLE `training` (
 	`training_center` varchar(10) NOT NULL COMMENT '교육을 들었던 기관 .... ex) 코드랩 아카데미',
 	`training_start` date NOT NULL COMMENT '개강 날짜',
 	`training_end` date NOT NULL COMMENT '종강 날짜',
-	`training_program` varchar(20) NOT NULL COMMENT 'ex) 부트캠프, K 인증 프로그램 등..',
 	PRIMARY KEY (training_id, resume_id),
     FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
 );
