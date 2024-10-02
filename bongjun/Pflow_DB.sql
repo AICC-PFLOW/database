@@ -14,7 +14,7 @@ CREATE TABLE `category` (
 
 CREATE TABLE `boards` (
 	`board_id` int NOT NULL COMMENT '게시글의 고유한 번호' AUTO_INCREMENT,
-	`board_title` varchar(20) NOT NULL,
+	`board_title` varchar(30) NOT NULL,
 	`board_content` varchar(1000) NULL,
 	`board_date` date NOT NULL,
 	`board_view` int NOT NULL COMMENT '방문한 숫자(0부터 시작)',
@@ -34,8 +34,8 @@ CREATE TABLE `graduation` (
 
 CREATE TABLE `education` (
 	`education_id` int NOT NULL COMMENT '작성한 학력의 고유 번호' AUTO_INCREMENT,
-	`school_name` varchar(10) NOT NULL,
-	`major` varchar(20) NULL COMMENT '대학교라면 전공, 고졸이면 null가능',
+	`school_name` varchar(20) NOT NULL,
+	`major` varchar(30) NULL COMMENT '대학교라면 전공, 고졸이면 null가능',
 	`education_date` date NOT NULL,
 	`graduation_id` int NOT NULL COMMENT '4개',
     PRIMARY KEY (education_id),
@@ -45,7 +45,7 @@ CREATE TABLE `education` (
 
 CREATE TABLE `cover_letter` (
 	`letter_id` int NOT NULL COMMENT '작성한 자소서 고유 번호' AUTO_INCREMENT,
-	`letter_title` varchar(20) NOT NULL COMMENT '자소서 제목',
+	`letter_title` varchar(30) NOT NULL COMMENT '자소서 제목',
 	`letter_content` varchar(1000) NOT NULL COMMENT '작성한 자소서 내용',
     PRIMARY KEY (letter_id)
 );
@@ -77,11 +77,11 @@ CREATE TABLE `comment` (
 CREATE TABLE `career` (
 	`career_id` int NOT NULL COMMENT '작성한 경력의 고유 번호',
     `resume_id` int NOT NULL,
-	`career_name` varchar(20) NOT NULL COMMENT '경력이 있는 사람만 테이블 생성',
+	`career_name` varchar(30) NOT NULL COMMENT '경력이 있는 사람만 테이블 생성',
 	`career_start` date NOT NULL,
 	`career_end` date NOT NULL,
 	`career_work` varchar(20) NOT NULL COMMENT '다니던 회사에서의 담당 업무',
-	`career_position` varchar(10) NOT NULL COMMENT 'ex) 사원, 대리, 과장, 부장, 연구원 등 ...',
+	`career_position` varchar(15) NOT NULL COMMENT 'ex) 사원, 대리, 과장, 부장, 연구원 등 ...',
 	PRIMARY KEY (career_id, resume_id),
     FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
 );
@@ -89,8 +89,8 @@ CREATE TABLE `career` (
 CREATE TABLE `training` (
 	`training_id` int NOT NULL COMMENT '작성한 교육이수의 고유 번호' AUTO_INCREMENT,
     `resume_id` int NOT NULL,
-    `training_name` varchar(20) NOT NULL,
-	`training_center` varchar(10) NOT NULL COMMENT '교육을 들었던 기관 .... ex) 코드랩 아카데미',
+    `training_name` varchar(30) NOT NULL,
+	`training_center` varchar(30) NOT NULL COMMENT '교육을 들었던 기관 .... ex) 코드랩 아카데미',
 	`training_start` date NOT NULL COMMENT '개강 날짜',
 	`training_end` date NOT NULL COMMENT '종강 날짜',
 	PRIMARY KEY (training_id, resume_id),
@@ -100,19 +100,19 @@ CREATE TABLE `training` (
 CREATE TABLE `skill` (
 	`skill_id` int NOT NULL,
     `resume_id` int NOT NULL,
-	`skill_name` varchar(10) NOT NULL COMMENT 'ex) python, JIRA 등등 ..',
+	`skill_name` varchar(30) NOT NULL COMMENT 'ex) python, JIRA 등등 ..',
 	PRIMARY KEY (skill_id, resume_id),
     FOREIGN KEY (resume_id) REFERENCES resume(resume_id) ON DELETE CASCADE
 );
 
 CREATE TABLE `user_info` (
 	`info_id` int NOT NULL AUTO_INCREMENT,
-	`info_name` varchar(5) NOT NULL,
+	`info_name` varchar(12) NOT NULL,
 	`info_gender` enum('남' , '여') NOT NULL,
 	`info_birth` date NOT NULL,
 	`info_phone_number` varchar(12) NOT NULL,
-	`info_address` varchar(20) NOT NULL,
-    `info_detail` varchar(20) NOT NULL,
+	`info_address` varchar(30) NOT NULL,
+    `info_detail` varchar(30) NOT NULL,
     `info_portfolio` varchar(30) NULL,
 	`user_id` int NOT NULL,
 	PRIMARY KEY (info_id),
